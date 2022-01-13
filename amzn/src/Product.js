@@ -8,10 +8,10 @@ function Product({ id, price, image, rating, title }) {
         <p>{title}</p>
         <p className="product__price">
           <small>$</small>
-          <strong>{price}</strong> 
+          <strong>{price}</strong>
         </p>
-        <div className="product__rating"> 
-        {/* Creates Multiple Stars in rating prop*/}
+        <div className="product__rating">
+          {/* Creates Multiple Stars in rating prop */}
           {Array(rating)
             .fill()
             .map((_i) => (
