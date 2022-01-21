@@ -24,7 +24,7 @@ function Home() {
             <Product
               id="59043343"
               title="Will Audible Logo Audible Audiobook – Unabridged"
-              price={239.99}
+              price={23.99}
               image="https://m.media-amazon.com/images/I/61gS6EWmWwL.jpg"
               rating={4}
             />
