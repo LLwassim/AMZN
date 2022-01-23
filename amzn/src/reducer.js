@@ -6,7 +6,7 @@ export const initialState = {
 export const getBasketTotal = (basket) => {
   return basket?.reduce((amount, item) => item.price + amount, 0);
 };
-
+//used to dispatch items
 const reducer = (state, action) => {
   console.log(action);
   switch (action.type) {

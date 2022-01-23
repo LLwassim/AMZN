@@ -23,8 +23,10 @@ function Header() {
       </div>
       <div className="header__nav">
         <div className="header__option">
-          <span className="header__optionline1">Hello</span>
-          <span className="header__optionline2">Sign In</span>
+          <Link to="/login">
+            <span className="header__optionline1">Hello, </span>
+            <span className="header__optionline2">Sign In</span>
+          </Link>
         </div>
 
         <div className="header__option">
@@ -41,6 +43,7 @@ function Header() {
           <div className="header__optionBasket">
             <ShoppingBasketIcon />
             <span className="header__optionline2 header__optionBasketCount">
+              {/* records basket length(items in basket) */}
               {basket?.length}
             </span>
           </div>
