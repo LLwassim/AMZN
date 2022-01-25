@@ -1,19 +1,45 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "./firebase-config";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import "./login.css";
 
 function Login() {
-  //useState() makes function reactive/dynamic (not static)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-  const signIn = (e) => {
-    //prevent default stops screening from refreshing to make it as fast as possible
-    e.preventDefualt();
+  const [user, setUser] = useState({});
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  const register = (e) => {
-    e.preventDefualt();
+  const signIn = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
