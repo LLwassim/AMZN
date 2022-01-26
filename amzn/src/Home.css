@@ -22,6 +22,6 @@
 
 .home__container {
   border: black;
-  border-style: solid;
-  border-width: 10px;
+  /* border-style: solid;
+  border-width: 10px; */
 }

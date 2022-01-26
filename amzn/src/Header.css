@@ -56,14 +56,14 @@
 .header__optionline2 {
   font-size: 13px;
   font-weight: 800;
-  color: antiquewhite;
+  color: white;
   /* text-decoration: none; */
 }
 
 .header__optionBasket {
   display: flex;
   align-items: center;
-  color: antiquewhite;
+  color: white;
 }
 .header__optionBasketCount {
   margin-left: 10px;
@@ -72,4 +72,23 @@
 a:-webkit-any-link {
   /* color: antiquewhite; */
   text-decoration: none;
+}
+
+.subHeader {
+  padding-left: 40px;
+  padding-right: 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #232f3e;
+  /* position: sticky; */
+  /* top: 0; */
+  /* z-index: 100; */
+  color: white;
+}
+.header__optionline23 {
+  font-size: 14px;
+  /* font-weight: 800; */
+  color: white;
+  /* text-decoration: none; */
 }
