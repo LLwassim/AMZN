@@ -1,46 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { auth } from "./firebase-config";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { login, logout, signup, useAuth } from "./firebase-config";
 import "./login.css";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const currentUser = useAuth();
 
-  const [user, setUser] = useState({});
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  async function handleSignup() {
+    setLoading(true);
 
-  const register = async () => {
+    await signup(emailRef.current.value, passwordRef.current.value);
+
+    setLoading(false);
+  }
+
+  async function handleLogin() {
+    setLoading(true);
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(user);
-    } catch (error) {
-      console.log(error.message);
+      await login(emailRef.current.value, passwordRef.current.value);
+    } catch {
+      alert("Error!");
     }
-  };
+    setLoading(false);
+  }
 
-  const signIn = async () => {
+  async function handleLogout() {
+    setLoading(true);
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
-      console.log(user);
-    } catch (error) {
-      console.log(error.message);
+      await logout();
+    } catch {
+      alert("Error!");
     }
-  };
+    setLoading(false);
+  }
 
   return (
     <div className="login">
@@ -55,40 +51,40 @@ function Login() {
         <h1>Sign In</h1>
         <form>
           <h5>Email</h5>
-
-          <input
-            type="email"
-            //maps email value to the variable below
-            value={email}
-            //onChange => fires off event 'e'
-            //pair function e with arrow function to setEmail which is a function that will set the email
-            //e.target.value is what user types in
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
+          <input ref={emailRef} placeholder="Email" />
           <h5>Password</h5>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
+          <input ref={passwordRef} type="password" placeholder="Password" />
         </form>
 
         <button
-          //when user hits enter button type = submit makes the user acivate the onclick event on the sign in button
-          type="submit"
-          onClick={signIn}
-          className="signInButton"
+          className="registerButton"
+          disabled={loading || currentUser}
+          onClick={handleSignup}
         >
-          Sign In
+          Register
+        </button>
+        <Link to="/">
+          <button
+            className="signInButton"
+            disabled={loading || currentUser}
+            onClick={handleLogin}
+          >
+            Sign In
+          </button>
+        </Link>
+        <button
+          className="registerButton"
+          disabled={loading || !currentUser}
+          onClick={handleLogout}
+        >
+          Log Out
         </button>
         <p>
           By continuing, you agree to Wassim's Amazon Fake Clone Conditions of
           Use and Privacy Notice.
         </p>
-        <button onClick={register} className="registerButton">
-          Create your Amazon Account
-        </button>
       </div>
+      <p> Currently logged in as: {currentUser?.email}</p>
     </div>
   );
 }

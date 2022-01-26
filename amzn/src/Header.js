@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
+import { currentUser } from "./Login";
 
 //Link is used to create a clickable link or route you can follow
 function Header() {
