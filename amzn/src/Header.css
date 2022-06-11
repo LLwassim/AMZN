@@ -75,15 +75,16 @@ a:-webkit-any-link {
 }
 
 .subHeader {
-  padding-left: 40px;
+  padding-left: 20px;
   padding-right: 20px;
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   background-color: #232f3e;
-  /* position: sticky; */
-  /* top: 0; */
-  /* z-index: 100; */
+  position: sticky;
+  top: 0;
+  z-index: 100;
   color: white;
 }
 .header__optionline23 {
